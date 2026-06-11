@@ -1,5 +1,5 @@
-# go_microservices
-This is a project showcasing how to build a small distributed system
+# Gicroservices
+This is a project showcasing how to build a small distributed system in golang.
 
 ### Technologies
 - Redis
