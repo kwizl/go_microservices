@@ -1,10 +1,10 @@
 
 CREATE TABLE users (
-    i BIGSERTAL PRIMARY KEY, 
+    i BIGSERIAL PRIMARY KEY, 
     email VARCHAR(255), 
     first_name VARCHAR(255), 
     last_name VARCHAR(255), 
-    password VARCHAR(GO),
+    password VARCHAR(100),
     user_active BOOLEAN DEFAULT false,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, 
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
@@ -19,10 +19,10 @@ INSERT INTO users (
     created_at,
     updated_at
 ) VALUES (
-'admin@example.com',
-'Admin',
-'User',
-'$$2a$12$1zGLuYDDNvAThh4RA4avbKuheAMpb1svexSrzQm7up.bnpwQHs0jNe',
-true,
-'2026-05-11 00:00:00',
-'2026-03-11 00:00:00');
+    'admin@example.com',
+    'Admin',
+    'User',
+    '$$2a$12$1zGLuYDDNvAThh4RA4avbKuheAMpb1svexSrzQm7up.bnpwQHs0jNe',
+    true,
+    '2026-05-11 00:00:00',
+    '2026-03-11 00:00:00');

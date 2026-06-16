@@ -1,6 +1,7 @@
 package data
 
 import (
+	"bytes"
 	"context"
 	"time"
 
@@ -188,40 +189,40 @@ func (u *User) ResetPassword(password string) error {
 	return exe
 }
 
-// // Changes user details
-// func (u *User) PasswordMatches(plainText string) (bool, error) {
-// 	ctx, cancel := context.WithTimeout(context.Background(), dbTimeout)
-// 	defer cancel()
+// Changes user details
+func (u *User) PasswordMatches(plainText string) (bool, error) {
+	ctx, cancel := context.WithTimeout(context.Background(), dbTimeout)
+	defer cancel()
 
-// 	hashedPassword, err := bcrypt.GenerateFromPassword([]byte(plainText), 12)
+	hashedPassword, err := bcrypt.GenerateFromPassword([]byte(plainText), 12)
 
-// 	if err != nil {
-// 		return false, err
-// 	}
+	if err != nil {
+		return false, err
+	}
 
-// 	query := `select password from users where id = $1`
+	query := `select password from users where id = $1`
 
-// 	var user User
-// 	row := db.QueryRowContext(ctx, query, u.ID)
+	var user User
+	row := db.QueryRowContext(ctx, query, u.ID)
 
-// 	exe := row.Scan(
-// 		&user.ID,
-// 		&user.FirstName,
-// 		&user.LastName,
-// 		&user.Password,
-// 		&user.Active,
-// 		&user.CreatedAt,
-// 		&user.UpdatedAt,
-// 	)
+	exe := row.Scan(
+		&user.ID,
+		&user.FirstName,
+		&user.LastName,
+		&user.Password,
+		&user.Active,
+		&user.CreatedAt,
+		&user.UpdatedAt,
+	)
 
-// 	if exe != nil {
-// 		return false, exe
-// 	}
+	if exe != nil {
+		return false, exe
+	}
 
-// 	conv := []byte(user.Password)
-// 	if conv != hashedPassword {
-// 		return false, exe
-// 	}
+	conv := []byte(user.Password)
+	if bytes.Equal(conv, hashedPassword) {
+		return false, exe
+	}
 
-// 	return true, nil
-// }
+	return true, nil
+}
